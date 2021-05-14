@@ -1,0 +1,14 @@
+version: '2'
+services:
+  mqtt:
+    image: eclipse-mosquitto
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`mqtt.local`)"
+      - "traefik.http.routers.whoami.tls=true"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./:/mosquitto/config
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
